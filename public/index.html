@@ -9,6 +9,13 @@
     <meta name="description" content="Web site created using Locofy" />
     <title>ライトアップ2</title>
   </head>
+  <script type="text/javascript">
+    (function () {
+      emailjs.init({
+        publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_ID,
+      });
+    })();
+  </script>
   <body>
     <div id="root"></div>
   </body>
