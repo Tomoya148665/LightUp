@@ -12,14 +12,14 @@ export default function Inquiry() {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const submitMail: SubmitHandler<Inputs> = async (data) => {
-    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID;
-    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
-    const publicId = process.env.REACT_APP_EMAILJS_PUBLIC_ID;
+    const serviceId = process.env.REACT_APP_EMAILJS_SERVICE_ID!;
+    const templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID!;
+    const publicId = process.env.REACT_APP_EMAILJS_PUBLIC_ID!;
 
     try {
       await emailjs.send(serviceId, templateId, data, publicId);
