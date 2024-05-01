@@ -1,7 +1,43 @@
-import { FunctionComponent } from "react";
-import Person from "./Person";
+import { FunctionComponent, useEffect, useState } from "react";
+import Person, { PersonType } from "./Person";
 
 const MentorResignation: FunctionComponent = () => {
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [people, setPeople] = useState<PersonType[]>([]);
+  const [selectedPerson, setSelectedPerson] = useState({ id: "", role: "" });
+
+  useEffect(() => {
+    const fetchedPeople: PersonType[] = [
+      {
+        personName: "John Doe",
+        personId: "1",
+        personMail: "john@example.com",
+        personImage: "/path/to/image",
+        onClick: () => {},
+        isSelected: false,
+        role: "mentor",
+      },
+      {
+        personName: "Jane Doe",
+        personId: "2",
+        personMail: "jane@example.com",
+        personImage: "/path/to/image",
+        onClick: () => {},
+        isSelected: false,
+        role: "",
+      },
+    ];
+    setPeople(fetchedPeople);
+  }, []);
+
+  const toggleSelection = (id: string, role: "mentor" | "mentee") => {
+    if (selectedPerson.id === id && selectedPerson.role === role) {
+      setSelectedPerson({ id: "", role: "" });
+    } else {
+      setSelectedPerson({ id, role });
+    }
+  };
+
   return (
     <div className="self-stretch flex-1 flex flex-col items-center justify-start text-left text-3xl text-black font-libre-franklin">
       <div className="self-stretch flex-1 flex flex-col items-center justify-start gap-[10px]">
@@ -11,114 +47,14 @@ const MentorResignation: FunctionComponent = () => {
               <div className="relative font-semibold">メンター</div>
             </div>
             <div className="h-[563px] overflow-y-auto shrink-0 flex flex-col items-center justify-start py-[3px] px-px box-border text-5xs text-text-dart font-roboto">
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
+              {people.map((person) => (
+                <Person
+                  key={person.personId}
+                  {...person}
+                  onClick={() => toggleSelection(person.personId, "mentor")}
+                  isSelected={selectedIds.includes(person.personId)}
+                />
+              ))}
             </div>
           </div>
           <div className="w-[265px] flex flex-col items-center justify-start">
@@ -126,114 +62,14 @@ const MentorResignation: FunctionComponent = () => {
               <div className="relative font-semibold">メンティー</div>
             </div>
             <div className="h-[563px] overflow-y-auto shrink-0 flex flex-col items-center justify-start py-[3px] px-px box-border">
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
-              <Person
-                personName="伊藤達也"
-                personId="AO04832245"
-                personMail="AO04832245@gmail.com"
-                personImage="/image-3@2x.png"
-              />
+              {people.map((person) => (
+                <Person
+                  key={person.personId}
+                  {...person}
+                  onClick={() => toggleSelection(person.personId, "mentee")}
+                  isSelected={selectedIds.includes(person.personId)}
+                />
+              ))}
             </div>
           </div>
         </div>

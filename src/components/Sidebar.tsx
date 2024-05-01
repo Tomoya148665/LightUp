@@ -35,7 +35,7 @@ const Sidebar: FunctionComponent<SidebarType> = ({
   };
 
   return (
-    <div className="box-border self-stretch bg-black flex flex-col items-center justify-start p-8 gap-4 h-screen text-left text-base text-white font-libre-franklin">
+    <div className="box-border self-stretch bg-black flex flex-col items-center justify-start p-8 gap-4 text-left text-base text-white font-libre-franklin">
       <img className="relative h-10 object-cover" alt="" src={image1} />
       <div className="w-[225.5px] flex flex-col items-center justify-start">
         <div className="relative font-semibold">伊藤　だいち</div>
