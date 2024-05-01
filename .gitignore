@@ -34,3 +34,5 @@ pids
 # OS-specific
 Thumbs.db
   
+backend/venv
+venv
