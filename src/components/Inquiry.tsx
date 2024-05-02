@@ -14,6 +14,7 @@ export default function Inquiry() {
     handleSubmit,
     reset,
     formState: { errors },
+    clearErrors,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
   const submitMail: SubmitHandler<Inputs> = async (data) => {
@@ -23,9 +24,15 @@ export default function Inquiry() {
 
     try {
       await emailjs.send(serviceId, templateId, data, publicId);
+      alert("無事に送信されました。");
     } catch (error) {
       console.error("エラーが出ました" + error);
     }
+  };
+
+  const onClick = () => {
+    reset();
+    clearErrors();
   };
 
   return (
@@ -74,6 +81,7 @@ export default function Inquiry() {
               {errors.inquiry && <span>この入力は必須です</span>}
             </div>
             <button
+              onClick={onClick}
               type="submit"
               className="cursor-pointer [border:none] py-2 px-[72px] bg-royalblue-100 rounded-2xl flex flex-row items-center justify-start"
             >
